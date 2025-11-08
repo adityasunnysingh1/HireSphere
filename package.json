@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/adityasunnysingh1/Vynterview/issues"
   },
-  "homepage": "https://github.com/adityasunnysingh1/Vynterview#readme"
+  "homepage": "https://github.com/adityasunnysingh1/Vynterview#readme",
+  "dependencies": {
+    "@clerk/clerk-react": "^5.53.8",
+    "mongoose": "^8.19.3"
+  }
 }
