@@ -9,7 +9,7 @@ const app = express();
 const __dirname = path.resolve();
 //Middleware
 app.use(express.json());
-app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));//Credentials=>server allows a browser to include cookies on requests
+app.use(cors({ origin: "*", credentials: true }));//Credentials=>server allows a browser to include cookies on requests
 app.use("/api/inngest", serve({client:inngest, functions}));
 app.get("/health", (req,res)=>{
     res.status(200).json({message:"API is up and running"})
