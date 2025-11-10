@@ -15,10 +15,10 @@ app.use(cors({
 }));
 
 app.use("/api/inngest", serve({client:inngest, functions}));
-app.get("/health", (req,res)=>{
+app.get("api/health", (req,res)=>{
     res.status(200).json({message:"API is up and running"})
 })
-app.get("/books", (req,res)=>{
+app.get("api/books", (req,res)=>{
     res.status(200).json({message:"API is up and running"})
 })
 //Make our app ready for deployment
