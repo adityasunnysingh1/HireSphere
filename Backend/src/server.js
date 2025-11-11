@@ -10,9 +10,9 @@ const __dirname = path.resolve();
 //Middleware
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:5173"],
+  origin: ENV.CLIENT_URL,
   credentials: true
-}));
+})); //Server allows a browser to include cookies on request
 
 app.use("/api/inngest", serve({client:inngest, functions}));
 app.get("api/health", (req,res)=>{
