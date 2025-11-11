@@ -24,7 +24,7 @@ app.get("api/books", (req,res)=>{
 //Make our app ready for deployment
 if(ENV.NODE_ENV === "production"){
     app.use(express.static(path.join(__dirname,"../frontend/dist")))
-    app.get("/{*any}", (req,res)=>{
+    app.get("*", (req,res)=>{
         res.sendFile(path.join(__dirname,"../frontend/dist/index.html"))
     })
 }
