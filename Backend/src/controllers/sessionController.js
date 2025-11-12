@@ -91,14 +91,19 @@ export async function joinSession(req,res){
     if(!session){
         return res.status(404).json({message: "Session not found"})
     }
+    if(session.status !== "active"){
+        return res.status(400).json({message: "Cannot join a completed session"})
+    };
+    if(session.host.toString() === userId.toString()){
+        return res.status(400).json({message: "Host cannot join their own session"})
+    };
     //Check if session is already full - has a participant
-    if(session.participant) return res.status(404).json({message: "Session is already full"})
-    
-    session.participant = userId;
-    await session.save();
+    if(session.participant) return res.status(409).json({message: "Session is already full"})
 
     const channel = chatClient.channel("messaging", session.callId);
     await channel.addMembers([clerkId]);
+    session.participant = userId;
+    await session.save();
     res.status(200).json({session});
     } catch (error) {
         console.log("Error in joinSession controller", error.message);
