@@ -44,7 +44,10 @@ export async function createSession(req,res){
 
 export async function getActiveSessions(_,res){
     try {
-        const sessions = await Session.find({status: "active"}).populate("host", "name clerkId profilePicture").sort({createdAt: -1}).limit(20);
+        const sessions = await Session.find({status: "active"})
+        .populate("host", "name clerkId profilePicture")
+        .populate("participant", "name clerkId profilePicture")
+        .sort({createdAt: -1}).limit(20);
         return res.status(200).json({sessions});
     } catch (error) {
         console.log("Error in getActiveSessions controller", error.message);
