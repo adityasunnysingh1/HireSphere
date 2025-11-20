@@ -60,9 +60,12 @@ function DashboardPage() {
               activeSessionsCount={activeSessions.length}
               recentSessionsCount={recentSessions.length}
             />
-            <ActiveSessions sessions={activeSessions} isUserInSession={isUserInSession} isLoading={loadingActiveSessions}/>
+            <ActiveSessions 
+            sessions={activeSessions} 
+            isUserInSession={isUserInSession} 
+            isLoading={loadingActiveSessions}/>
           </div>
-          <RecentSessions />
+          <RecentSessions sessions={recentSessions} isLoading={loadingRecentSessions}/>
         </div>
       </div>
       <CreateSessionModal
