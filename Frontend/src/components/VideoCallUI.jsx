@@ -3,8 +3,6 @@ import {
   CallingState,
   SpeakerLayout,
   useCallStateHooks,
-  useChatStateHooks,
-  useVideoStateHooks,
 } from "@stream-io/video-react-sdk";
 import { Loader2Icon, MessageSquareIcon, UsersIcon, XIcon } from "lucide-react";
 import { useState } from "react";

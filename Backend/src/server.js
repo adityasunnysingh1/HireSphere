@@ -21,7 +21,7 @@ app.use(clerkMiddleware()); //This adds auth field to request object: req.auth()
 app.use("/api/inngest", serve({client:inngest, functions}));
 app.use("/api/chat", chatRoutes);
 app.use("/api/sessions", sessionRoutes);
-app.get("api/health", (req,res)=>{
+app.get("/api/health", (req,res)=>{
     res.status(200).json({message:"API is up and running"})
 })
 
@@ -38,8 +38,6 @@ const startServer = async()=>{
         await connectDB();
         const port = ENV.PORT || 3000;
         app.listen(port, () => console.log(`✅ Server running on port ${port}`));
-
-
     } catch (error) {
         console.error("💥Error starting the server:", error)
     }
