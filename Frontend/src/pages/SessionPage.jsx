@@ -5,18 +5,18 @@ import {
   useEndSession,
   useJoinSession,
   useSessionById,
-} from "../hooks/useSessions";
-import { PROBLEMS } from "../data/problems";
-import { executeCode } from "../api/codeExecution";
+} from "../hooks/useSessions.js";
+import { PROBLEMS } from "../data/problems.js";
+import { executeCode } from "../lib/piston.js";
 import { useEffect } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar.jsx";
 import { PanelGroup, PanelResizeHandle } from "react-resizable-panels";
-import { getDifficultyBadgeClass } from "../lib/utils";
+import { getDifficultyBadgeClass } from "../lib/utils.js";
 import { Loader2Icon, LogOutIcon, PhoneOffIcon } from "lucide-react";
-import CodeEditorPanel from "../components/CodeEditorPanel";
-import OutputPanel from "../components/OutputPanel";
-import useStreamClient from "../hooks/useStreamClient";
-import VideoCallUI from "../components/VideoCallUI";
+import CodeEditorPanel from "../components/CodeEditorPanel.jsx";
+import OutputPanel from "../components/OutputPanel.jsx";
+import useStreamClient from "../hooks/useStreamClient.js";
+import VideoCallUI from "../components/VideoCallUI.jsx";
 
 function SessionPage() {
   const navigate = useNavigate();

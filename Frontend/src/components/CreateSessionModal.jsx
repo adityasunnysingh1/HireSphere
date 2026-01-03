@@ -1,5 +1,5 @@
 import { Loader2Icon, PlusIcon } from "lucide-react";
-import { PROBLEMS } from "../utils/constants";
+import { PROBLEMS } from "../data/problems.js";
 function CreateSessionModal({
   isOpen,
   onClose,

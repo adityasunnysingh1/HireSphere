@@ -1,7 +1,7 @@
 import { ChevronRightIcon, Code2Icon, Link } from "lucide-react";
-import Navbar from "../components/Navbar";
-import { PROBLEMS } from "../data/problems";
-import { getDifficultyBadgeClass } from "../lib/utils";
+import Navbar from "../components/Navbar.jsx";
+import { PROBLEMS } from "../data/problems.js";
+import { getDifficultyBadgeClass } from "../lib/utils.js";
 function ProblemsPage() {
   const problems = Object.values(PROBLEMS);
   const easyProblemsCount = problems.filter((problem)=>problem.difficulty === "Easy").length;
