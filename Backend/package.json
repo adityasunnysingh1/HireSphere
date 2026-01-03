@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "build": "npm install && cd Frontend && npm install && npm run build"
+    "build": "ls -la && npm install && cd Frontend && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
