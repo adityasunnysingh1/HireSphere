@@ -1,5 +1,4 @@
 import express from "express";
-import path from "path";
 import cors from "cors";
 import {serve} from "inngest/express";
 import {clerkMiddleware} from "@clerk/express";
@@ -10,7 +9,10 @@ import { protectRoute } from "./middlewares/protectRoute.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import sessionRoutes from "./routes/sessionRoutes.js";
 const app = express();
-const __dirname = path.resolve();
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 //Middleware
 app.use(express.json());
 app.use(cors({
@@ -28,7 +30,7 @@ app.get("/api/health", (req,res)=>{
 //Make our app ready for deployment
 if(ENV.NODE_ENV === "production"){
     app.use(express.static(path.join(__dirname,"../frontend/dist")))
-    app.get("/:path(.*)", (req,res)=>{
+    app.get(/.*/, (req,res)=>{
         res.sendFile(path.join(__dirname,"../frontend/dist/index.html"))
     })
 }
