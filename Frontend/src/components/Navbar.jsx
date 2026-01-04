@@ -1,5 +1,5 @@
 import { UserButton } from "@clerk/clerk-react";
-import { SparklesIcon, BookOpenIcon, DashboardIcon } from "lucide-react";
+import { SparklesIcon, BookOpenIcon, LayoutDashboard } from "lucide-react";
 import { Link, useLocation } from "react-router";
 function Navbar() {
   const location = useLocation();
@@ -60,7 +60,7 @@ function Navbar() {
          `}
           >
             <div className="flex items-center gap-x-2.5">
-              <DashboardIcon className="size-4"/>
+              <LayoutDashboard className="size-4"/>
               <span className="font-medium hidden sm:inline">Dashboard</span>
             </div>
           </Link>
