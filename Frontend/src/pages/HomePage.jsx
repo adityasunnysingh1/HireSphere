@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { CheckIcon, Code2Icon, SparklesIcon, UsersIcon, VideoIcon, ZapIcon } from "lucide-react";
+import { CheckIcon, Code2Icon, SparklesIcon, UsersIcon, VideoIcon, ZapIcon, ArrowRightIcon } from "lucide-react";
 import { SignInButton, SignOutButton } from "@clerk/clerk-react";
 function HomePage() {
   return (
