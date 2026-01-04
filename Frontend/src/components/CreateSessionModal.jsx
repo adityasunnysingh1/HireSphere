@@ -1,4 +1,4 @@
-import { Loader2Icon, PlusIcon } from "lucide-react";
+import {PlusIcon, Code2Icon, LoaderIcon } from "lucide-react";
 import { PROBLEMS } from "../data/problems.js";
 function CreateSessionModal({
   isOpen,
