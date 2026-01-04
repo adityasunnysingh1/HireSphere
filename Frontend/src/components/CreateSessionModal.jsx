@@ -1,4 +1,4 @@
-import {PlusIcon, Code2Icon, LoaderIcon } from "lucide-react";
+import {PlusIcon, Code2Icon, Loader2Icon } from "lucide-react";
 import { PROBLEMS } from "../data/problems.js";
 function CreateSessionModal({
   isOpen,
@@ -76,7 +76,7 @@ function CreateSessionModal({
             disabled={isCreating || !roomConfig.problem}
           >
             {isCreating ? (
-              <LoaderIcon className="size-5 animate-spin" />
+              <Loader2Icon className="size-5 animate-spin" />
             ) : (
               <PlusIcon className="size-5" />
             )}
