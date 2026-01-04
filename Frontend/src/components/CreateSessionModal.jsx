@@ -1,5 +1,6 @@
-import {PlusIcon, Code2Icon, Loader2Icon } from "lucide-react";
+import { Loader2Icon, PlusIcon, Code2Icon } from "lucide-react";
 import { PROBLEMS } from "../data/problems.js";
+
 function CreateSessionModal({
   isOpen,
   onClose,
@@ -8,8 +9,11 @@ function CreateSessionModal({
   onCreateRoom,
   isCreating,
 }) {
+  // 🛡️ SAFETY CHECK: This line prevents the "Gray Screen" crash
   const problems = PROBLEMS ? Object.values(PROBLEMS) : [];
+
   if (!isOpen) return null;
+
   return (
     <div className="modal modal-open">
       <div className="modal modal-box">
@@ -20,18 +24,18 @@ function CreateSessionModal({
           <div className="space-y-2">
             <label className="label">
               <span className="label-text font-semibold">Select Problem</span>
-              <span className="label-text-alt text">*</span>
+              <span className="label-text-alt text-error">*</span>
             </label>
 
             <select
-              className="select w-full"
-              value={roomConfig.problem}
+              className="select w-full bg-base-200"
+              value={roomConfig?.problem || ""}
               onChange={(e) => {
                 const selectedProblem = problems.find(
                   (p) => p.title === e.target.value
                 );
                 setRoomConfig({
-                  difficulty: selectedProblem.difficulty,
+                  difficulty: selectedProblem?.difficulty || "medium",
                   problem: e.target.value,
                 });
               }}
@@ -39,16 +43,21 @@ function CreateSessionModal({
               <option value="" disabled>
                 Choose a coding problem...
               </option>
-              {problems.map((problem) => (
-                <option key={problem.id} value={problem.title}>
-                  {problem.title} ({problem.difficulty})
-                </option>
-              ))}
+              {/* 🛡️ SAFETY CHECK: Only map if we have problems */}
+              {problems.length > 0 ? (
+                problems.map((problem) => (
+                  <option key={problem.id} value={problem.title}>
+                    {problem.title} ({problem.difficulty})
+                  </option>
+                ))
+              ) : (
+                <option disabled>No problems loaded</option>
+              )}
             </select>
           </div>
 
           {/* ROOM SUMMARY */}
-          {roomConfig.problem && (
+          {roomConfig?.problem && (
             <div className="alert alert-success">
               <Code2Icon className="size-5" />
               <div>
@@ -73,7 +82,7 @@ function CreateSessionModal({
           <button
             className="btn btn-primary gap-2"
             onClick={onCreateRoom}
-            disabled={isCreating || !roomConfig.problem}
+            disabled={isCreating || !roomConfig?.problem}
           >
             {isCreating ? (
               <Loader2Icon className="size-5 animate-spin" />
