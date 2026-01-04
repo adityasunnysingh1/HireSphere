@@ -8,7 +8,7 @@ function CreateSessionModal({
   onCreateRoom,
   isCreating,
 }) {
-  const problems = Object.values(PROBLEMS);
+  const problems = PROBLEMS ? Object.values(PROBLEMS) : [];
   if (!isOpen) return null;
   return (
     <div className="modal modal-open">
