@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import ProblemsPage from "./pages/ProblemsPage.jsx";
 import ProblemPage from "./pages/ProblemPage.jsx";
+import SessionPage from "./pages/SessionPage";
 import { Toaster } from "react-hot-toast";
 function App() {
   const { isSignedIn, isLoaded } = useUser();
