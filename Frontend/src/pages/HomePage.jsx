@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { CheckIcon, Code2Icon, SparklesIcon, UsersIcon, VideoIcon, ZapIcon } from "lucide-react";
-import { SignedInButton, SignedOutButton } from "@clerk/clerk-react";
+import { SignInButton, SignOutButton } from "@clerk/clerk-react";
 function HomePage() {
   return (
     <div className="min-h-screen bg-linear-gradient-to-br from-base-100 via-base-200 to-base-300">
@@ -26,7 +26,7 @@ function HomePage() {
           </Link>
 
           {/* AUTH BTN */}
-          <SignedInButton mode="modal">
+          <SignInButton mode="modal">
             <button
               className="group px-6 py-3 bg-linear-gradient-to-br from-primary to-secondary rounded-2xl text-white
        font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex items-center 
@@ -35,7 +35,7 @@ function HomePage() {
               <span className="">Get Started</span>
               <ArrowRightIcon className="size-4 group-hover:translate-x-2 transition-transform duration-200" />
             </button>
-          </SignedInButton>
+          </SignInButton>
         </div>
       </nav>
 
@@ -78,12 +78,12 @@ function HomePage() {
             </div>
             {/* CTA Button */}
             <div className="flex flex-wrap gap-4">
-              <SignedInButton mode="modal">
+              <SignOutButton mode="modal">
                 <button className="btn btn-primary btn-lg">
                   Start Coding Now
                   <ArrowRightIcon className="size-5" />
                 </button>
-              </SignedInButton>
+              </SignOutButton>
 
               <button className="btn btn-outline btn-lg">
                 <VideoIcon className="size-5" />
