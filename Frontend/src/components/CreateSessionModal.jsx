@@ -16,7 +16,7 @@ function CreateSessionModal({
 
   return (
     <div className="modal modal-open z-50">
-      <div className="modal modal-box bg-base-100 text-base-content shadow-xl border border-base-300">
+      <div className="modal modal-box bg-base-100 text-base-content opacity-100 border border-base-300 relative shadow-xl">
         <h3 className="text-2xl font-bold mb-6">Create New Session</h3>
 
         <div className="space-y-8">
