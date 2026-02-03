@@ -1,7 +1,23 @@
 import axios from "axios";
+
 const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL,
-    withCredentials: true, //browser will send the cookies automatically to the server
+    baseURL: import.meta.env.VITE_API_URL, 
+    withCredentials: true,
+});
+
+axiosInstance.interceptors.request.use(async (config) => {
+    try {
+        const token = await window.Clerk?.session?.getToken();
+        
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        } else {
+            console.warn("⚠️ No Clerk token found. User might not be logged in.");
+        }
+    } catch (error) {
+        console.error("Error fetching Clerk token:", error);
+    }
+    return config;
 });
 
 export default axiosInstance;
