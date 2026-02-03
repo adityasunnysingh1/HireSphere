@@ -26,7 +26,16 @@ app.use("/api/sessions", sessionRoutes);
 app.get("/api/health", (req,res)=>{
     res.status(200).json({message:"API is up and running"})
 })
-
+app.get("/", (req, res) => {
+    res.status(200).json({
+        message: "Vynterview API is running successfully",
+        endpoints: {
+            health: "/api/health",
+            chat: "/api/chat",
+            sessions: "/api/sessions"
+        }
+    });
+});
 //Make our app ready for deployment
 if(ENV.NODE_ENV === "production"){
     app.use(express.static(path.join(__dirname, "../../Frontend/dist")));
