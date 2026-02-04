@@ -7,9 +7,59 @@ import { connectDB } from "./lib/db.js";
 import { inngest, functions } from "./lib/inngest.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import sessionRoutes from "./routes/sessionRoutes.js";
+
+// 1. Add Svix Import (Required to verify Clerk's ID card)
+import { Webhook } from "svix";
+
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+
+// 🛑 IMPORTANT: This Webhook Route MUST be defined BEFORE app.use(express.json())
+// This route listens for Clerk messages, checks the signature, and forwards them to Inngest.
+app.post(
+  "/api/webhooks",
+  express.raw({ type: "application/json" }), // Use raw body for signature verification
+  async (req, res) => {
+    try {
+      const SIGNING_SECRET = process.env.CLERK_WEBHOOK_SECRET;
+      
+      if (!SIGNING_SECRET) {
+        throw new Error("Error: CLERK_WEBHOOK_SECRET is missing in Render/Env");
+      }
+
+      // Create a new Svix instance with your secret
+      const wh = new Webhook(SIGNING_SECRET);
+      const headers = req.headers;
+      const payload = req.body;
+
+      // Verify the payload (Safety Check)
+      const evt = wh.verify(payload, {
+        "svix-id": headers["svix-id"],
+        "svix-timestamp": headers["svix-timestamp"],
+        "svix-signature": headers["svix-signature"],
+      });
+
+      const { type, data } = evt;
+
+      // ✅ Success! Send the event to Inngest
+      if (type === "user.created") {
+          await inngest.send({
+            name: "clerk/user.created",
+            data: { ...data, id: data.id },
+            user: { id: data.id }
+          });
+          console.log("✅ Webhook: User Created event sent to Inngest!");
+      }
+
+      res.status(200).json({ success: true });
+
+    } catch (err) {
+      console.log("❌ Webhook failed:", err.message);
+      res.status(400).json({ success: false, message: err.message });
+    }
+  }
+);
 
 // Middleware
 app.use(express.json());
