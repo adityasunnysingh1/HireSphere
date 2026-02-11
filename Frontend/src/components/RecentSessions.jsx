@@ -7,7 +7,7 @@ function RecentSessions({ sessions, isLoading }) {
     <div className="card bg-base-100 border-2 border-accent/20 hover:border-accent/30 mt-8">
       <div className="card-body">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-linear-gradient-to-br from-accent to-secondary rounded-xl">
+          <div className="p-2 bg-linear-to-br from-accent to-secondary rounded-xl">
             <Clock className="w-5 h-5 text-white" />
           </div>
           <h2 className="text-2xl font-black">Your Past Sessions</h2>

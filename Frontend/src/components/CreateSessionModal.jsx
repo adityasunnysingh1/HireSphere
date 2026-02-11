@@ -1,4 +1,4 @@
-import { Loader2Icon, PlusIcon, Code2Icon } from "lucide-react";
+import { Code2Icon, LoaderIcon, PlusIcon } from "lucide-react";
 import { PROBLEMS } from "../data/problems.js";
 
 function CreateSessionModal({
@@ -9,15 +9,14 @@ function CreateSessionModal({
   onCreateRoom,
   isCreating,
 }) {
-  // 🛡️ SAFETY CHECK: This line prevents the "Gray Screen" crash
-  const problems = PROBLEMS ? Object.values(PROBLEMS) : [];
+  const problems = Object.values(PROBLEMS);
 
   if (!isOpen) return null;
 
   return (
-    <div className="modal modal-open z-50">
-      <div className="modal modal-box bg-base-100 text-base-content opacity-100 border border-base-300 relative shadow-xl">
-        <h3 className="text-2xl font-bold mb-6">Create New Session</h3>
+    <div className="modal modal-open">
+      <div className="modal-box max-w-2xl">
+        <h3 className="font-bold text-2xl mb-6">Create New Session</h3>
 
         <div className="space-y-8">
           {/* PROBLEM SELECTION */}
@@ -28,14 +27,12 @@ function CreateSessionModal({
             </label>
 
             <select
-              className="select w-full bg-base-200"
-              value={roomConfig?.problem || ""}
+              className="select w-full"
+              value={roomConfig.problem}
               onChange={(e) => {
-                const selectedProblem = problems.find(
-                  (p) => p.title === e.target.value
-                );
+                const selectedProblem = problems.find((p) => p.title === e.target.value);
                 setRoomConfig({
-                  difficulty: selectedProblem?.difficulty || "medium",
+                  difficulty: selectedProblem.difficulty,
                   problem: e.target.value,
                 });
               }}
@@ -43,32 +40,26 @@ function CreateSessionModal({
               <option value="" disabled>
                 Choose a coding problem...
               </option>
-              {/* 🛡️ SAFETY CHECK: Only map if we have problems */}
-              {problems.length > 0 ? (
-                problems.map((problem) => (
-                  <option key={problem.id} value={problem.title}>
-                    {problem.title} ({problem.difficulty})
-                  </option>
-                ))
-              ) : (
-                <option disabled>No problems loaded</option>
-              )}
+
+              {problems.map((problem) => (
+                <option key={problem.id} value={problem.title}>
+                  {problem.title} ({problem.difficulty})
+                </option>
+              ))}
             </select>
           </div>
 
           {/* ROOM SUMMARY */}
-          {roomConfig?.problem && (
+          {roomConfig.problem && (
             <div className="alert alert-success">
               <Code2Icon className="size-5" />
               <div>
                 <p className="font-semibold">Room Summary:</p>
                 <p>
-                  Problem:{" "}
-                  <span className="font-medium">{roomConfig.problem}</span>
+                  Problem: <span className="font-medium">{roomConfig.problem}</span>
                 </p>
                 <p>
-                  Max Participants:{" "}
-                  <span className="font-medium">2 (1-on-1 session)</span>
+                  Max Participants: <span className="font-medium">2 (1-on-1 session)</span>
                 </p>
               </div>
             </div>
@@ -79,17 +70,19 @@ function CreateSessionModal({
           <button className="btn btn-ghost" onClick={onClose}>
             Cancel
           </button>
+
           <button
             className="btn btn-primary gap-2"
             onClick={onCreateRoom}
-            disabled={isCreating || !roomConfig?.problem}
+            disabled={isCreating || !roomConfig.problem}
           >
             {isCreating ? (
-              <Loader2Icon className="size-5 animate-spin" />
+              <LoaderIcon className="size-5 animate-spin" />
             ) : (
               <PlusIcon className="size-5" />
             )}
-            {isCreating ? "Creating..." : "Create Room"}
+
+            {isCreating ? "Creating..." : "Create"}
           </button>
         </div>
       </div>
@@ -97,5 +90,4 @@ function CreateSessionModal({
     </div>
   );
 }
-
 export default CreateSessionModal;

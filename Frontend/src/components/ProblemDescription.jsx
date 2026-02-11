@@ -1,36 +1,27 @@
 import { getDifficultyBadgeClass } from "../lib/utils.js";
-function ProblemDescription({
-  problem,
-  currentProblemId,
-  onProblemChange,
-  allProblems,
-}) {
+function ProblemDescription({ problem, currentProblemId, onProblemChange, allProblems }) {
   return (
     <div className="h-full overflow-y-auto bg-base-200">
       {/* HEADER SECTION */}
       <div className="p-6 bg-base-100 border-b border-base-300">
         <div className="flex items-start justify-between mb-3">
-          <h1 className="text-3xl font-bold text-base-content">
-            {problem.title}
-          </h1>
-          <span
-            className={`badge ${getDifficultyBadgeClass(problem.difficulty)}`}
-          >
+          <h1 className="text-3xl font-bold text-base-content">{problem.title}</h1>
+          <span className={`badge ${getDifficultyBadgeClass(problem.difficulty)}`}>
             {problem.difficulty}
           </span>
         </div>
-        <p className="text-base-content/60 ">{problem.category}</p>
+        <p className="text-base-content/60">{problem.category}</p>
 
-        {/* Problem Selector */}
-        <div className="mt-4 ">
+        {/* Problem selector */}
+        <div className="mt-4">
           <select
             className="select select-sm w-full"
             value={currentProblemId}
             onChange={(e) => onProblemChange(e.target.value)}
           >
-            {allProblems.map((problem) => (
-              <option key={problem.id} value={problem.id}>
-                {problem.title}-{problem.difficulty}
+            {allProblems.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.title} - {p.difficulty}
               </option>
             ))}
           </select>
@@ -38,13 +29,16 @@ function ProblemDescription({
       </div>
 
       <div className="p-6 space-y-6">
-        {/* PROBLEM DESCRIPTION */}
+        {/* PROBLEM DESC */}
         <div className="bg-base-100 rounded-xl shadow-sm p-5 border border-base-300">
-          <h2 className="text-xl font-bold text-base-content">Problem Description</h2>
+          <h2 className="text-xl font-bold text-base-content">Description</h2>
+
           <div className="space-y-3 text-base leading-relaxed">
             <p className="text-base-content/90">{problem.description.text}</p>
-            {problem.description.notes.map((note,idx)=>(
-              <p className="text-base-content/90" key={idx}>{note}</p>
+            {problem.description.notes.map((note, idx) => (
+              <p key={idx} className="text-base-content/90">
+                {note}
+              </p>
             ))}
           </div>
         </div>
