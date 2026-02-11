@@ -9,7 +9,7 @@ import { connectDB } from "./lib/db.js";
 import { inngest, functions } from "./lib/inngest.js";
 
 import chatRouter from "./routes/chatRoutes.js";
-import sessionRouter from "./routes/sessionRoute.js";
+import sessionRouter from "./routes/sessionRoutes.js";
 
 const app = express();
 
