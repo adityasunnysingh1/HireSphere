@@ -5,46 +5,36 @@
 
 ## ✨ Features
 
-- **Live Coding Environment**: Real-time shared code editor with syntax highlighting.
-- **Video & Audio Calls**: High-quality video conferencing powered by **Stream**.
-- **Secure Authentication**: User management and security handled by **Clerk**.
-- **AI-Powered Insights**: Smart interview analysis and suggestions using **Google Gemini AI**.
-- **Event-Driven Architecture**: Robust background job processing using **Inngest**.
-- **Responsive UI**: Beautiful, modern interface built with **Tailwind CSS** and **DaisyUI**.
+🧑‍💻 VSCode-Powered Code Editor: Provides a familiar and powerful coding interface identical to VS Code for a seamless development experience.
 
----
+🔐 Authentication via Clerk: Secure and seamless user authentication and session management powered by Clerk.
 
-## 🛠️ Tech Stack
+🎥 1-on-1 Video Interview Rooms: Dedicated high-quality video environments designed specifically for real-time peer-to-peer technical interviews.
 
-### Frontend
-- **React.js**: Component-based UI library.
-- **Tailwind CSS**: Utility-first CSS framework.
-- **DaisyUI**: Component library for Tailwind.
-- **Vite**: Fast build tool and development server.
+🧭 Dashboard with Live Stats: Interactive user dashboard offering real-time analytics and insights into coding performance.
 
-### Backend
-- **Node.js**: JavaScript runtime environment.
-- **Express.js**: Web framework for Node.js.
-- **MongoDB**: NoSQL database for storing user sessions and data.
+🔊 Mic & Camera Toggle, Screen Sharing & Recording: Comprehensive media controls including audio/video toggles, screen sharing capabilities, and session recording.
 
-### Services & APIs
-- **Clerk**: Authentication and User Management.
-- **Stream**: Real-time Video and Chat SDK.
-- **Inngest**: Event-driven background jobs and webhooks.
-- **Google Gemini**: Generative AI for code analysis.
+💬 Real-time Chat Messaging: Integrated instant messaging system for quick communication alongside code and video streams.
 
----
+⚙️ Secure Code Execution: Safely executes user-submitted code within a strictly isolated sandbox to prevent security vulnerabilities.
 
-## 🚀 Getting Started
+🎯 Auto Feedback: Instant automated grading that validates code against pre-defined test cases for immediate pass/fail feedback.
 
-Follow these steps to set up the project locally.
+🎉 Gamified Visuals: Engaging visual feedback system featuring celebratory confetti for passed tests and clear notifications for errors.
 
-### Prerequisites
-- Node.js (v18 or higher)
-- MongoDB installed locally or a MongoDB Atlas URI
-- Accounts on [Clerk](https://clerk.com), [GetStream](https://getstream.io), [Inngest](https://inngest.com), and [Google AI Studio](https://aistudio.google.com).
+🧩 Practice Problems Page: A dedicated library of coding challenges designed for solo practice and skill refinement outside of interviews.
 
-### 1. Clone the Repository
-```bash
-git clone [https://github.com/your-username/Vynterview.git](https://github.com/your-username/Vynterview.git)
-cd Vynterview
+🔒 Room Locking: Enhanced privacy controls that automatically lock rooms to restrict access to exactly two participants.
+
+🧠 Background Jobs with Inngest: Utilizes Inngest to manage heavy background tasks asynchronously, ensuring the UI remains responsive.
+
+🧰 REST API with Node.js & Express: Robust and scalable backend architecture built on Node.js and Express to handle API requests efficiently.
+
+⚡ Data Fetching & Caching: Optimized state management with TanStack Query for lightning-fast data fetching and intelligent caching.
+
+🤖 CodeRabbit Integration: Integrated AI-driven analysis via CodeRabbit to automate PR reviews and suggest code optimizations.
+
+🧑‍💻 Git & GitHub Workflow: Adopts industry-standard version control practices including branching strategies, pull requests, and merging.
+
+🚀 Deployment on Sevalla: Hosted on Sevalla's cloud infrastructure to ensure high availability while maintaining cost-efficiency.
