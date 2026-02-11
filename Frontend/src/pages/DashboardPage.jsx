@@ -3,12 +3,12 @@ import { useUser } from "@clerk/clerk-react";
 import { useState } from "react";
 import { useActiveSessions, useCreateSession, useMyRecentSessions } from "../hooks/useSessions.js";
 
-import Navbar from "../components/Navbar.js";
-import WelcomeSection from "../components/WelcomeSection.js";
-import StatsCards from "../components/StatsCards.js";
-import ActiveSessions from "../components/ActiveSessions.js";
-import RecentSessions from "../components/RecentSessions.js";
-import CreateSessionModal from "../components/CreateSessionModal.js";
+import Navbar from "../components/Navbar.jsx";
+import WelcomeSection from "../components/WelcomeSection.jsx";
+import StatsCards from "../components/StatsCards.jsx";
+import ActiveSessions from "../components/ActiveSessions.jsx";
+import RecentSessions from "../components/RecentSessions.jsx";
+import CreateSessionModal from "../components/CreateSessionModal.jsx";
 
 function DashboardPage() {
   const navigate = useNavigate();
