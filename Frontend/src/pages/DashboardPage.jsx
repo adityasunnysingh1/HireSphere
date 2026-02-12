@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { useUser } from "@clerk/clerk-react";
+import { useUser, useAuth } from "@clerk/clerk-react"; 
 import { useState } from "react";
 import { useActiveSessions, useCreateSession, useMyRecentSessions } from "../hooks/useSessions.js";
 
@@ -13,6 +13,7 @@ import CreateSessionModal from "../components/CreateSessionModal.jsx";
 function DashboardPage() {
   const navigate = useNavigate();
   const { user } = useUser();
+  const { getToken } = useAuth();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [roomConfig, setRoomConfig] = useState({ problem: "", difficulty: "" });
 
@@ -21,29 +22,39 @@ function DashboardPage() {
   const { data: activeSessionsData, isLoading: loadingActiveSessions } = useActiveSessions();
   const { data: recentSessionsData, isLoading: loadingRecentSessions } = useMyRecentSessions();
 
-  const handleCreateRoom = () => {
+  const handleCreateRoom = async () => {
     if (!roomConfig.problem || !roomConfig.difficulty) return;
 
-    createSessionMutation.mutate(
-      {
-        problem: roomConfig.problem,
-        difficulty: roomConfig.difficulty.toLowerCase(),
-      },
-      {
-        onSuccess: (data) => {
-          setShowCreateModal(false);
-          navigate(`/session/${data.session._id}`);
+    try {
+      const token = await getToken(); // 🔑 Get the fresh token
+
+      createSessionMutation.mutate(
+        {
+          problem: roomConfig.problem,
+          difficulty: roomConfig.difficulty.toLowerCase(),
+          token: token, // 📦 Bundle the token with the data
         },
-      }
-    );
+        {
+          onSuccess: (data) => {
+            setShowCreateModal(false);
+            const sessionId = data.session?._id || data._id; 
+            navigate(`/session/${sessionId}`);
+          },
+          onError: (error) => {
+            console.error("Failed to create session:", error);
+          }
+        }
+      );
+    } catch (err) {
+      console.error("Error getting token:", err);
+    }
   };
 
   const activeSessions = activeSessionsData?.sessions || [];
   const recentSessions = recentSessionsData?.sessions || [];
 
   const isUserInSession = (session) => {
-    if (!user.id) return false;
-
+    if (!user?.id) return false;
     return session.host?.clerkId === user.id || session.participant?.clerkId === user.id;
   };
 

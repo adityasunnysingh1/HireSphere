@@ -1,8 +1,13 @@
 import axiosInstance from "../lib/axios.js";
 
 export const sessionApi = {
-  createSession: async (data) => {
-    const response = await axiosInstance.post("/sessions", data);
+  createSession: async (data, token) => {
+    const response = await axiosInstance.post("/sessions", data, {
+      headers: {
+        //  Manually attach the Clerk Token
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   },
 
