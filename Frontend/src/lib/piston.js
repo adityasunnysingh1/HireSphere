@@ -4,10 +4,11 @@ const LANGUAGE_VERSIONS = {
   javascript: { language: "javascript", version: "18.15.0" },
   python: { language: "python", version: "3.10.0" },
   java: { language: "java", version: "15.0.2" },
+  cpp: { language: "cpp", version: "10.2.0" },
 };
 
 /**
- * @param {string} language - programming language
+ * @param {string} language - programming language (use 'cpp' for C++)
  * @param {string} code - source code to executed
  * @returns {Promise<{success:boolean, output?:string, error?: string}>}
  */
@@ -22,6 +23,7 @@ export async function executeCode(language, code) {
       };
     }
 
+    // Piston API Call
     const response = await fetch(`${PISTON_API}/execute`, {
       method: "POST",
       headers: {
@@ -32,7 +34,8 @@ export async function executeCode(language, code) {
         version: languageConfig.version,
         files: [
           {
-            name: `main.${getFileExtension(language)}`,
+            // This will now dynamically generate "main.cpp" for C++
+            name: `main.${getFileExtension(language)}`, 
             content: code,
           },
         ],
@@ -51,6 +54,7 @@ export async function executeCode(language, code) {
     const output = data.run.output || "";
     const stderr = data.run.stderr || "";
 
+    // If Piston returns standard error (compilation errors usually go here)
     if (stderr) {
       return {
         success: false,
@@ -76,6 +80,7 @@ function getFileExtension(language) {
     javascript: "js",
     python: "py",
     java: "java",
+    cpp: "cpp",
   };
 
   return extensions[language] || "txt";
