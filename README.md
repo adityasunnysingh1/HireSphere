@@ -1,10 +1,10 @@
 # ⚡ Vynterview: Real-Time Collaborative Interview Platform
 
-![Vynterview Banner](https://img.shields.io/badge/Status-Production_Ready-success?style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge) ![Deployment](https://img.shields.io/badge/Deployed_on-Railway-violet?style=for-the-badge)
+![Vynterview Banner](https://img.shields.io/badge/Status-Production_Ready-success?style=for-the-badge)                            ![Deployment](https://img.shields.io/badge/Deployed_on-Railway-violet?style=for-the-badge)
 
 > **The seamless bridge between talent and opportunity.** Vynterview is a high-fidelity technical interview platform that combines live video conferencing, synchronized code editing, and multi-language runtime execution in a single, secure environment.
 
-🔗 **Live Demo:** [https://vynterview-production.up.railway.app/](https://vynterview-production.up.railway.app/) *(Replace with your actual link if different)*
+🔗 **Live Demo:** [https://vynterview-production.up.railway.app/](https://vynterview-production.up.railway.app/) 
 
 ---
 
@@ -66,7 +66,7 @@ Follow these steps to run Vynterview on your local machine.
 ### Prerequisites
 * Node.js (v18+)
 * MongoDB URI
-* Clerk & Stream API Keys
+* Clerk, Stream, & Inngest API Keys
 
 ### Installation
 
@@ -76,29 +76,65 @@ Follow these steps to run Vynterview on your local machine.
     cd Vynterview
     ```
 
-2.  **Install Dependencies (Root, Frontend, & Backend)**
+2.  **Install Dependencies**
+    Install dependencies for the root, frontend, and backend.
     ```bash
     npm install
     cd Frontend && npm install
     cd ../Backend && npm install
     ```
 
-3.  **Environment Setup**
-    Create a `.env` file in the `Backend` directory:
+3.  **Environment Configuration 🔐**
+
+    You need to create **two** `.env` files. One in the `Frontend` folder and one in the `Backend` folder.
+
+    **A. Frontend Configuration**
+    Navigate to `Frontend/` and create a `.env` file:
     ```env
-    PORT=5000
-    MONGODB_URI=your_mongodb_connection_string
-    CLERK_PUBLISHABLE_KEY=your_clerk_key
-    CLERK_SECRET_KEY=your_clerk_secret
-    STREAM_API_KEY=your_stream_key
-    STREAM_API_SECRET=your_stream_secret
+    VITE_API_URL=http://localhost:5000/api
+    VITE_CLERK_PUBLISHABLE_KEY=pk_test_... (Your Clerk Publishable Key)
+    VITE_STREAM_API_KEY=... (Your Stream API Key)
     ```
 
-4.  **Run the App**
+    **B. Backend Configuration**
+    Navigate to `Backend/` and create a `.env` file:
+    ```env
+    PORT=5000
+    NODE_ENV=development
+    MONGO_URL=mongodb+srv://... (Your MongoDB Connection String)
+
+    # Auth (Clerk)
+    CLERK_PUBLISHABLE_KEY=pk_test_...
+    CLERK_SECRET_KEY=sk_test_...
+
+    # Background Jobs (Inngest)
+    INNGEST_EVENT_KEY=... (From Inngest Dashboard)
+    INNGEST_SIGNING_KEY=...
+
+    # Real-Time (GetStream)
+    STREAM_API_KEY=...
+    STREAM_API_SECRET=...
+
+    # Client Redirects
+    CLIENT_URL=http://localhost:5173
+    ```
+
+4.  **Run the App 🚀**
+    Open two separate terminals to run the servers concurrently:
+
+    **Terminal 1 (Backend):**
     ```bash
-    # From the root directory
+    cd Backend
     npm run dev
     ```
+
+    **Terminal 2 (Frontend):**
+    ```bash
+    cd Frontend
+    npm run dev
+    ```
+
+    Visit `http://localhost:5173` to view the app!
 
 ---
 
@@ -117,8 +153,8 @@ Contributions are welcome! This project follows the "feature-branch" workflow.
 
 **Aditya Singh** - Full Stack Developer
 * [GitHub](https://github.com/adityasunnysingh1)
-* [LinkedIn](https://linkedin.com/in/your-linkedin-profile)
-* [Email](mailto:your.email@example.com)
+* [LinkedIn](https://linkedin.com/in/adityasunnysingh)
+* [Email](mailto:mnnitadityasingh@gmail.com)
 
 ---
 
