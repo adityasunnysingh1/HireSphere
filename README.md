@@ -1,6 +1,6 @@
 # ⚡ Vynterview: Real-Time Collaborative Interview Platform
 
-![Vynterview Banner](https://img.shields.io/badge/Status-Production_Ready-success?style=for-the-badge)                            ![Deployment](https://img.shields.io/badge/Deployed_on-Railway-violet?style=for-the-badge)
+  ![Frontend Deployment](./assets/Frontend_deploy.png)           ![Backend Deployment](./assets/Backend_deploy.png)
 
 > **The seamless bridge between talent and opportunity.** Vynterview is a high-fidelity technical interview platform that combines live video conferencing, synchronized code editing, and multi-language runtime execution in a single, secure environment.
 
@@ -12,7 +12,7 @@
 
 | **Interactive Dashboard** | **Live Coding Arena** |
 |:---:|:---:|
-| ![Dashboard](./assets/dashboard.png) | ![Coding Room](./assets/coding_room.png) |
+| ![Dashboard](./assets/dashboard.png) | ![Coding Room](./assets/Coding_Room.png) |
 | *Real-time stats & session management* | *Monaco Editor + Video Call + Output Console* |
 
 ---
