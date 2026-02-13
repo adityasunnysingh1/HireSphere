@@ -1,27 +1,16 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { sessionApi } from "../api/sessions.js";
+import { sessionApi } from "../api/sessions";
 
 export const useCreateSession = () => {
-  const queryClient = useQueryClient(); // Get the client to refresh data later
-
-  return useMutation({
+  const result = useMutation({
     mutationKey: ["createSession"],
- 
-    mutationFn: ({ token, ...sessionData }) => {
-      return sessionApi.createSession(sessionData, token);
-    },
-
-    onSuccess: () => { // Accept data to use it if needed
-      toast.success("Session created successfully!");
-      // Refresh these lists so the new session appears immediately
-      queryClient.invalidateQueries(["activeSessions"]); 
-      queryClient.invalidateQueries(["recentSessions"]);
-    },
-    onError: (error) => {
-      toast.error(error.response?.data?.message || "Failed to create room");
-    },
+    mutationFn: sessionApi.createSession,
+    onSuccess: () => toast.success("Session created successfully!"),
+    onError: (error) => toast.error(error.response?.data?.message || "Failed to create room"),
   });
+
+  return result;
 };
 
 export const useActiveSessions = () => {
