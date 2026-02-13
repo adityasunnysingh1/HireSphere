@@ -12,7 +12,7 @@
 
 | **Interactive Dashboard** | **Live Coding Arena** |
 |:---:|:---:|
-| ![Dashboard](https://via.placeholder.com/600x300?text=Dashboard+Screenshot+Here) | ![Coding Room](https://via.placeholder.com/600x300?text=Coding+Room+Screenshot+Here) |
+| ![Dashboard](./assets/dashboard.png) | ![Coding Room](./assets/coding_room.png) |
 | *Real-time stats & session management* | *Monaco Editor + Video Call + Output Console* |
 
 ---
