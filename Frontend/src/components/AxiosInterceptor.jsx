@@ -7,16 +7,18 @@ const AxiosInterceptor = ({ children }) => {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    // 1. Setup the Interceptor
     const interceptor = axiosInstance.interceptors.request.use(
       async (config) => {
-        // 2. Grab the Token
         const token = await getToken();
         
-        // 3. Attach it to the Headers
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
+          // 👇 This log will show in console if it works!
+          console.log("🟢 Interceptor attached token:", token.slice(0, 10) + "...");
+        } else {
+          console.warn("🔴 No token found in Interceptor!");
         }
+        
         return config;
       },
       (error) => Promise.reject(error)
@@ -24,12 +26,10 @@ const AxiosInterceptor = ({ children }) => {
 
     setIsReady(true);
 
-    // 4. Cleanup when this component unmounts
     return () => axiosInstance.interceptors.request.eject(interceptor);
   }, [getToken]);
 
-  // Wait for the interceptor to be ready before rendering the app
-  return isReady ? children : null; 
+  return isReady ? children : null;
 };
 
 export default AxiosInterceptor;
