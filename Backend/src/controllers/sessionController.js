@@ -1,6 +1,6 @@
 import Session from "../models/Session.js";
 import {streamClient, chatClient} from "../lib/stream.js";
-export async function createSession(req,res){
+export const createSession = async (req,res) => {
     try {
         const {problem, difficulty} = req.body;
         if(!problem || !difficulty){
@@ -42,7 +42,7 @@ export async function createSession(req,res){
     }
 }
 
-export async function getActiveSessions(_,res){
+export const getActiveSessions = async (_,res) => {
     try {
         const sessions = await Session.find({status: "active"})
         .populate("host", "name clerkId profilePicture")
@@ -55,7 +55,7 @@ export async function getActiveSessions(_,res){
     }
 }
 
-export async function getMyRecentSessions(req,res){
+export const getMyRecentSessions = async (req,res) => {
     try {
         const userId = req.user._id;
         //get session where user is either host or participant
@@ -70,7 +70,7 @@ export async function getMyRecentSessions(req,res){
     }
 }
 
-export async function getSessionById(req,res){
+export const getSessionById = async (req,res) => {
     try {
         const {id} = req.params;
         const session = await Session.findById(id).populate("host", "name email clerkId profilePicture").populate("participant", "name email clerkId profilePicture");
@@ -84,7 +84,7 @@ export async function getSessionById(req,res){
     }
 }
 
-export async function joinSession(req,res){
+export const joinSession = async (req,res) => {
     try {
     const {id} = req.params;
     const userId = req.user._id;
@@ -115,10 +115,10 @@ export async function joinSession(req,res){
 
 }
 
-export async function endSession(req,res){
+export const endSession = async (req,res) => {
     try {
         const {id} = req.params;
-        const userId = req.user._id;
+        const userId = req.user._id; 
         
         const session = await Session.findById(id);
         if(!session) return res.status(404).json({message: "Session not found"});
