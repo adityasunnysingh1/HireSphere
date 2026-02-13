@@ -1,19 +1,127 @@
-## ✨ Features
+# ⚡ Vynterview: Real-Time Collaborative Interview Platform
 
-- **🧑‍💻 VSCode-Powered Code Editor:** Provides a familiar and powerful coding interface identical to VS Code for a seamless development experience.
-- **🔐 Authentication via Clerk:** Secure and seamless user authentication and session management powered by Clerk.
-- **🎥 1-on-1 Video Interview Rooms:** Dedicated high-quality video environments designed specifically for real-time peer-to-peer technical interviews.
-- **🧭 Dashboard with Live Stats:** Interactive user dashboard offering real-time analytics and insights into coding performance.
-- **🔊 Media Controls:** Comprehensive tools including audio/video toggles, screen sharing capabilities, and session recording.
-- **💬 Real-time Chat Messaging:** Integrated instant messaging system for quick communication alongside code and video streams.
-- **⚙️ Secure Code Execution:** Safely executes user-submitted code within a strictly isolated sandbox to prevent security vulnerabilities.
-- **🎯 Auto Feedback:** Instant automated grading that validates code against pre-defined test cases for immediate pass/fail feedback.
-- **🎉 Gamified Visuals:** Engaging visual feedback system featuring celebratory confetti for passed tests and clear notifications for errors.
-- **🧩 Practice Problems Page:** A dedicated library of coding challenges designed for solo practice and skill refinement outside of interviews.
-- **🔒 Room Locking:** Enhanced privacy controls that automatically lock rooms to restrict access to exactly two participants.
-- **🧠 Background Jobs with Inngest:** Utilizes Inngest to manage heavy background tasks asynchronously, ensuring the UI remains responsive.
-- **🧰 REST API with Node.js & Express:** Robust and scalable backend architecture built on Node.js and Express to handle API requests efficiently.
-- **⚡ Data Fetching & Caching:** Optimized state management with TanStack Query for lightning-fast data fetching and intelligent caching.
-- **🤖 CodeRabbit Integration:** Integrated AI-driven analysis via CodeRabbit to automate PR reviews and suggest code optimizations.
-- **🧑‍💻 Git & GitHub Workflow:** Adopts industry-standard version control practices including branching strategies, pull requests, and merging.
-- **🚀 Deployment on Sevalla:** Hosted on Sevalla's cloud infrastructure to ensure high availability while maintaining cost-efficiency.
+![Vynterview Banner](https://img.shields.io/badge/Status-Production_Ready-success?style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge) ![Deployment](https://img.shields.io/badge/Deployed_on-Railway-violet?style=for-the-badge)
+
+> **The seamless bridge between talent and opportunity.** Vynterview is a high-fidelity technical interview platform that combines live video conferencing, synchronized code editing, and multi-language runtime execution in a single, secure environment.
+
+🔗 **Live Demo:** [https://vynterview-production.up.railway.app/](https://vynterview-production.up.railway.app/) *(Replace with your actual link if different)*
+
+---
+
+## 📸 Screenshots
+
+| **Interactive Dashboard** | **Live Coding Arena** |
+|:---:|:---:|
+| ![Dashboard](https://via.placeholder.com/600x300?text=Dashboard+Screenshot+Here) | ![Coding Room](https://via.placeholder.com/600x300?text=Coding+Room+Screenshot+Here) |
+| *Real-time stats & session management* | *Monaco Editor + Video Call + Output Console* |
+
+---
+
+## 🚀 Key Features
+
+### 🛠️ Engineering & Architecture
+* **Event-Driven Architecture:** Utilizes **Inngest** to handle complex background workflows (user sync, session cleanup), ensuring 100% database consistency between Clerk (Auth) and MongoDB.
+* **Secure Webhook Synchronization:** Implemented robust webhook handlers to listen for identity events, eliminating data drift.
+* **Sandboxed Code Execution:** Integrated **Piston API** to safely compile and run user code (C++, Java, Python, JS) in isolated containers, preventing RCE vulnerabilities.
+* **JWT & Axios Interceptors:** Custom Axios interceptors automatically inject rotation-proof authentication tokens into every API request, ensuring seamless security.
+
+### 💻 The Interview Experience
+* **VS Code-Like Environment:** Powered by **Monaco Editor**, offering syntax highlighting, linting, and a familiar developer experience.
+* **Zero-Latency Collaboration:** Real-time state synchronization allows interviewers and candidates to type and debug simultaneously.
+* **Integrated Video/Audio:** Built on **Stream IO (WebRTC)** for high-quality, low-latency communication without needing third-party tools like Zoom.
+* **Multi-Language Support:** First-class support for **JavaScript, C++, Java, and Python**.
+
+### 🛡️ Security & Access
+* **Identity Management:** Powered by **Clerk** for secure, session-based authentication.
+* **Room Locking:** Privacy controls to strictly limit rooms to two participants (Interviewer & Candidate).
+
+---
+
+## 🏗️ Tech Stack
+
+| Domain | Technologies |
+| :--- | :--- |
+| **Frontend** | React.js (Vite), Tailwind CSS, Monaco Editor, Lucide React |
+| **Backend** | Node.js, Express.js, Mongoose (ODM) |
+| **Database** | MongoDB Atlas (NoSQL) |
+| **Auth & Queues** | Clerk (Auth), Inngest (Event Queues) |
+| **Real-Time** | Stream SDK (Video/Audio), WebSockets |
+| **DevOps** | Railway (CI/CD Deployment), Git/GitHub |
+
+---
+
+## ⚙️ System Architecture
+
+1.  **Client Layer:** React application with TanStack Query for efficient state management and caching.
+2.  **API Gateway:** Express.js REST API protected by Clerk Middleware.
+3.  **Execution Engine:** Code is sent to a stateless Piston container; results (stdout/stderr) are streamed back to the client.
+4.  **Event Bus:** Inngest functions listen for `user.created` or `session.ended` events to trigger DB updates asynchronously.
+
+---
+
+## 🔧 Getting Started Locally
+
+Follow these steps to run Vynterview on your local machine.
+
+### Prerequisites
+* Node.js (v18+)
+* MongoDB URI
+* Clerk & Stream API Keys
+
+### Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone [https://github.com/adityasunnysingh1/Vynterview.git](https://github.com/adityasunnysingh1/Vynterview.git)
+    cd Vynterview
+    ```
+
+2.  **Install Dependencies (Root, Frontend, & Backend)**
+    ```bash
+    npm install
+    cd Frontend && npm install
+    cd ../Backend && npm install
+    ```
+
+3.  **Environment Setup**
+    Create a `.env` file in the `Backend` directory:
+    ```env
+    PORT=5000
+    MONGODB_URI=your_mongodb_connection_string
+    CLERK_PUBLISHABLE_KEY=your_clerk_key
+    CLERK_SECRET_KEY=your_clerk_secret
+    STREAM_API_KEY=your_stream_key
+    STREAM_API_SECRET=your_stream_secret
+    ```
+
+4.  **Run the App**
+    ```bash
+    # From the root directory
+    npm run dev
+    ```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! This project follows the "feature-branch" workflow.
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+---
+
+## 📬 Contact
+
+**Aditya Singh** - Full Stack Developer
+* [GitHub](https://github.com/adityasunnysingh1)
+* [LinkedIn](https://linkedin.com/in/your-linkedin-profile)
+* [Email](mailto:your.email@example.com)
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ by Aditya Singh using the MERN Stack.</sub>
+</div>
